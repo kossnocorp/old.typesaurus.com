@@ -3,21 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "firemyna dev",
+    "build": "firemyna build",
     "lint": "next lint"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
     "@docsearch/react": "^3.1.0",
     "@headlessui/react": "^1.6.5",
-    "@markdoc/next.js": "^0.1.5",
     "@markdoc/markdoc": "^0.1.3",
+    "@markdoc/next.js": "^0.1.5",
     "@sindresorhus/slugify": "^2.1.0",
     "@tailwindcss/typography": "^0.5.2",
     "autoprefixer": "^10.4.7",
     "clsx": "^1.2.0",
+    "firebase-admin": "^11.0.1",
+    "firebase-functions": "^3.22.0",
     "focus-visible": "^5.2.0",
     "next": "12.2.3",
     "postcss-focus-visible": "^6.0.4",
@@ -30,6 +31,8 @@
   "devDependencies": {
     "eslint": "8.19.0",
     "eslint-config-next": "12.2.3",
+    "firebase-tools": "^11.8.0",
+    "firemyna": "^0.12.0",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.11"
   }
