@@ -13,60 +13,106 @@ import { ThemeSelector } from '@/components/ThemeSelector'
 
 const navigation = [
   {
+    type: 'links',
     title: 'Introduction',
     links: [
       { title: 'Getting started', href: '/' },
-      { title: 'Installation', href: '/docs/installation' },
+      { title: 'Key features', href: '/docs/features' },
     ],
   },
+
   {
-    title: 'Core concepts',
+    type: 'links',
+    title: 'Guides',
     links: [
-      { title: 'Understanding caching', href: '/docs/understanding-caching' },
+      { title: 'Designing schema', href: '/docs/guides/designing-schema' },
       {
-        title: 'Predicting user behavior',
-        href: '/docs/predicting-user-behavior',
+        title: 'Reading data',
+        href: '/docs/guides/reading',
       },
-      { title: 'Basics of time-travel', href: '/docs/basics-of-time-travel' },
+      { title: 'Writing data', href: '/docs/guides/writing' },
       {
-        title: 'Introduction to string theory',
-        href: '/docs/introduction-to-string-theory',
+        title: 'Transactions',
+        href: '/docs/guides/transactions',
       },
-      { title: 'The butterfly effect', href: '/docs/the-butterfly-effect' },
+      { title: 'Batch writes', href: '/docs/guides/batch' },
     ],
   },
+
   {
-    title: 'Advanced guides',
-    links: [
-      { title: 'Writing plugins', href: '/docs/writing-plugins' },
-      { title: 'Neuralink integration', href: '/docs/neuralink-integration' },
-      { title: 'Temporal paradoxes', href: '/docs/temporal-paradoxes' },
-      { title: 'Testing', href: '/docs/testing' },
-      { title: 'Compile-time caching', href: '/docs/compile-time-caching' },
-      {
-        title: 'Predictive data generation',
-        href: '/docs/predictive-data-generation',
-      },
-    ],
-  },
-  {
+    type: 'groups',
     title: 'API reference',
-    links: [
-      { title: 'CacheAdvance.predict()', href: '/docs/cacheadvance-predict' },
-      { title: 'CacheAdvance.flush()', href: '/docs/cacheadvance-flush' },
-      { title: 'CacheAdvance.revert()', href: '/docs/cacheadvance-revert' },
-      { title: 'CacheAdvance.regret()', href: '/docs/cacheadvance-regret' },
-    ],
-  },
-  {
-    title: 'Contributing',
-    links: [
-      { title: 'How to contribute', href: '/docs/how-to-contribute' },
-      { title: 'Architecture guide', href: '/docs/architecture-guide' },
-      { title: 'Design principles', href: '/docs/design-principles' },
+    groups: [
+      {
+        type: 'links',
+        title: 'Defining schema',
+        links: [{ title: 'schema', href: '/docs/api/schema' }],
+      },
+
+      {
+        type: 'links',
+        title: 'Reading data',
+        links: [
+          { title: 'get', href: '/docs/api/get' },
+          { title: 'all', href: '/docs/api/all' },
+          { title: 'query', href: '/docs/api/query' },
+          { title: 'many', href: '/docs/api/many' },
+        ],
+      },
+
+      {
+        type: 'links',
+        title: 'Writing data',
+        links: [
+          { title: 'add', href: '/docs/api/add' },
+          { title: 'set', href: '/docs/api/set' },
+          { title: 'update', href: '/docs/api/update' },
+          { title: 'upset', href: '/docs/api/upset' },
+          { title: 'remove', href: '/docs/api/remove' },
+        ],
+      },
+
+      {
+        type: 'links',
+        title: 'Advanced',
+        links: [
+          { title: 'transaction', href: '/docs/api/transaction' },
+          { title: 'batch', href: '/docs/api/batch' },
+          { title: 'groups', href: '/docs/api/groups' },
+        ],
+      },
+
+      {
+        type: 'links',
+        title: 'Classes',
+        links: [
+          { title: 'Collection', href: '/docs/api/collection' },
+          { title: 'Ref', href: '/docs/api/ref' },
+          { title: 'Doc', href: '/docs/api/doc' },
+        ],
+      },
     ],
   },
 ]
+
+const allLinks = navigation.reduce(createReduceLinks(), [])
+
+function createReduceLinks(parentIndex) {
+  return (acc, section, index) => {
+    switch (section.type) {
+      case 'links':
+        return acc.concat(
+          section.links.map((link) => ({
+            link,
+            sectionIndex: parentIndex ?? index,
+          }))
+        )
+
+      case 'groups':
+        return section.groups.reduce(createReduceLinks(index), acc)
+    }
+  }
+}
 
 function GitHubIcon(props) {
   return (
@@ -77,7 +123,7 @@ function GitHubIcon(props) {
 }
 
 function Header({ navigation }) {
-  let [isScrolled, setIsScrolled] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
     function onScroll() {
@@ -122,30 +168,30 @@ function Header({ navigation }) {
 }
 
 function useTableOfContents(tableOfContents) {
-  let [currentSection, setCurrentSection] = useState(tableOfContents[0]?.id)
+  const [currentSection, setCurrentSection] = useState(tableOfContents[0]?.id)
 
-  let getHeadings = useCallback((tableOfContents) => {
+  const getHeadings = useCallback((tableOfContents) => {
     return tableOfContents
       .flatMap((node) => [node.id, ...node.children.map((child) => child.id)])
       .map((id) => {
-        let el = document.getElementById(id)
+        const el = document.getElementById(id)
         if (!el) return
 
-        let style = window.getComputedStyle(el)
-        let scrollMt = parseFloat(style.scrollMarginTop)
+        const style = window.getComputedStyle(el)
+        const scrollMt = parseFloat(style.scrollMarginTop)
 
-        let top = window.scrollY + el.getBoundingClientRect().top - scrollMt
+        const top = window.scrollY + el.getBoundingClientRect().top - scrollMt
         return { id, top }
       })
   }, [])
 
   useEffect(() => {
     if (tableOfContents.length === 0) return
-    let headings = getHeadings(tableOfContents)
+    const headings = getHeadings(tableOfContents)
     function onScroll() {
-      let top = window.scrollY
+      const top = window.scrollY
       let current = headings[0].id
-      for (let heading of headings) {
+      for (const heading of headings) {
         if (top >= heading.top) {
           current = heading.id
         } else {
@@ -165,16 +211,15 @@ function useTableOfContents(tableOfContents) {
 }
 
 export function Layout({ children, title, tableOfContents }) {
-  let router = useRouter()
-  let isHomePage = router.pathname === '/'
-  let allLinks = navigation.flatMap((section) => section.links)
-  let linkIndex = allLinks.findIndex((link) => link.href === router.pathname)
-  let previousPage = allLinks[linkIndex - 1]
-  let nextPage = allLinks[linkIndex + 1]
-  let section = navigation.find((section) =>
-    section.links.find((link) => link.href === router.pathname)
+  const router = useRouter()
+  const isHomePage = router.pathname === '/'
+  const linkIndex = allLinks.findIndex(
+    ({ link }) => link.href === router.pathname
   )
-  let currentSection = useTableOfContents(tableOfContents)
+  const previousPage = allLinks[linkIndex - 1]
+  const nextPage = allLinks[linkIndex + 1]
+  const section = navigation[allLinks[linkIndex].sectionIndex]
+  const currentSection = useTableOfContents(tableOfContents)
 
   function isActive(section) {
     if (section.id === currentSection) {
@@ -204,6 +249,7 @@ export function Layout({ children, title, tableOfContents }) {
             />
           </div>
         </div>
+
         <div className="min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none lg:pr-0 lg:pl-8 xl:px-16">
           <article>
             {(title || section) && (
@@ -222,6 +268,7 @@ export function Layout({ children, title, tableOfContents }) {
             )}
             <Prose>{children}</Prose>
           </article>
+
           <dl className="mt-12 flex border-t border-slate-200 pt-6 dark:border-slate-800">
             {previousPage && (
               <div>
@@ -230,14 +277,16 @@ export function Layout({ children, title, tableOfContents }) {
                 </dt>
                 <dd className="mt-1">
                   <Link
-                    href={previousPage.href}
+                    href={previousPage.link.href}
                     className="text-base font-semibold text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
                   >
-                    <span aria-hidden="true">&larr;</span> {previousPage.title}
+                    <span aria-hidden="true">&larr;</span>{' '}
+                    {previousPage.link.title}
                   </Link>
                 </dd>
               </div>
             )}
+
             {nextPage && (
               <div className="ml-auto text-right">
                 <dt className="font-display text-sm font-medium text-slate-900 dark:text-white">
@@ -245,16 +294,17 @@ export function Layout({ children, title, tableOfContents }) {
                 </dt>
                 <dd className="mt-1">
                   <Link
-                    href={nextPage.href}
+                    href={nextPage.link.href}
                     className="text-base font-semibold text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
                   >
-                    {nextPage.title} <span aria-hidden="true">&rarr;</span>
+                    {nextPage.link.title} <span aria-hidden="true">&rarr;</span>
                   </Link>
                 </dd>
               </div>
             )}
           </dl>
         </div>
+
         <div className="hidden xl:sticky xl:top-[4.5rem] xl:-mr-6 xl:block xl:h-[calc(100vh-4.5rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:pr-6">
           <nav aria-labelledby="on-this-page-title" className="w-56">
             {tableOfContents.length > 0 && (
