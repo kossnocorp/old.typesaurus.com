@@ -18,6 +18,7 @@ const navigation = [
     links: [
       { title: 'Getting started', href: '/' },
       { title: 'Key features', href: '/docs/features' },
+      { title: 'Philosophy & architecture', href: '/docs/architecture' },
     ],
   },
 
@@ -26,6 +27,7 @@ const navigation = [
     title: 'Guides',
     links: [
       { title: 'Designing schema', href: '/docs/guides/designing-schema' },
+      { title: 'Type safety', href: '/docs/guides/type-safety' },
       {
         title: 'Reading data',
         href: '/docs/guides/reading',
