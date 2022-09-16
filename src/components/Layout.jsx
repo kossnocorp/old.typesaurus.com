@@ -90,8 +90,9 @@ const navigation = [
 
       {
         type: 'links',
-        title: 'Extensions',
+        title: 'Misc',
         links: [
+          { title: 'id', href: '/docs/api/id' },
           { title: 'transaction', href: '/docs/api/transaction' },
           { title: 'batch', href: '/docs/api/batch' },
           { title: 'groups', href: '/docs/api/groups' },

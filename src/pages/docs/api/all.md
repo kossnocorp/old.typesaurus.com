@@ -1,6 +1,6 @@
 ---
 title: all
-description: all function reference
+description: all method reference
 ---
 
 ## TL;DR

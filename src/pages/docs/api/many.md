@@ -1,4 +1,4 @@
 ---
 title: many
-description: many function reference
+description: many method reference
 ---

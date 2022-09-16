@@ -1,4 +1,4 @@
 ---
 title: upset
-description: upset function reference
+description: upset method reference
 ---

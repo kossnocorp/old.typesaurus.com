@@ -1,4 +1,4 @@
 ---
 title: query
-description: query function reference
+description: query method reference
 ---

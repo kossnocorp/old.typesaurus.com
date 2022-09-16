@@ -15,6 +15,10 @@ description: TODO
 
 ---
 
+## Subcollections
+
+---
+
 ## Typed ids
 
 Often databases have similarily sounding entities, e.g., user and account. To prevent developers from mixing those and introducing stealthy bugs, Typesaurus makes all ids typed.
@@ -53,7 +57,7 @@ const userId = db.users.id('sasha')
 const newUserId = await db.users.id()
 ```
 
-[Read more about the collection method `id`](/docs/api/collection#id).
+[Read more about the `id` method](/docs/api/id).
 
 ### Id type
 
@@ -81,7 +85,7 @@ logId(accountId.toString())
 
 ### Shared ids
 
-If your collections share ids, i.e. you use the organization id to store subscription document, you can define custom id and make collections share id:
+If your collections share ids, i.e. you use the organization id to store subscription document, you can define custom id and make collections share id with help of [`Typesaurus.Id`](/docs/api/type/id):
 
 ```ts
 import { schema, Typesaurus } from 'typesaurus'
@@ -103,7 +107,8 @@ function removeOrganization(organizationId: Schema['organizations']['Id']) {
 }
 ```
 
-[Read more about `Id` type](/docs/api/type/id).
+- [Read more about `Id` type](/docs/api/type/id).
+- [When to use shared ids](/docs/guides/designing-schema#sharing-ids).
 
 ### Static ids
 
@@ -120,6 +125,8 @@ db.regionStats.update('us', ($) => {
   online: $.increment(1)
 })
 ```
+
+[When to use static ids](/docs/guides/designing-schema#single-document-collection).
 
 ---
 

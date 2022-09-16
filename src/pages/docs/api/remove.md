@@ -1,4 +1,4 @@
 ---
 title: remove
-description: remove function reference
+description: remove method reference
 ---

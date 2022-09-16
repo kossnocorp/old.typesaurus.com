@@ -1,4 +1,4 @@
 ---
 title: transaction
-description: transaction function reference
+description: transaction method reference
 ---

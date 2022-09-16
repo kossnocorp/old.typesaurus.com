@@ -1,4 +1,4 @@
 ---
 title: set
-description: set function reference
+description: set method reference
 ---

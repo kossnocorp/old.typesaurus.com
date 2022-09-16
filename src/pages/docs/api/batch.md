@@ -1,4 +1,4 @@
 ---
 title: batch
-description: batch function reference
+description: batch method reference
 ---

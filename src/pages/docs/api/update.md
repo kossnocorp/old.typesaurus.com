@@ -1,4 +1,4 @@
 ---
 title: update
-description: update function reference
+description: update method reference
 ---

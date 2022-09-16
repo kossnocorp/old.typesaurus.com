@@ -1,4 +1,4 @@
 ---
 title: groups
-description: groups function reference
+description: groups method reference
 ---

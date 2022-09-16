@@ -1,4 +1,4 @@
 ---
 title: schema
-description: schema function reference
+description: schema method reference
 ---

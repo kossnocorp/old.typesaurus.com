@@ -1,4 +1,4 @@
 ---
 title: add
-description: add function reference
+description: add method reference
 ---

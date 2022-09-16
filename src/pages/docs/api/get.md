@@ -1,6 +1,6 @@
 ---
 title: get
-description: get function reference
+description: get method reference
 ---
 
 ## TL;DR
