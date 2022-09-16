@@ -23,27 +23,41 @@ const navigation = [
   },
 
   {
-    type: 'links',
+    type: 'groups',
     title: 'Guides',
-    links: [
-      { title: 'Designing schema', href: '/docs/guides/designing-schema' },
-      { title: 'Type safety', href: '/docs/guides/type-safety' },
+    groups: [
       {
-        title: 'Reading data',
-        href: '/docs/guides/reading',
+        type: 'links',
+        title: 'Getting started',
+        links: [
+          {
+            title: 'Reading data',
+            href: '/docs/guides/reading',
+          },
+          { title: 'Writing data', href: '/docs/guides/writing' },
+        ],
       },
-      { title: 'Writing data', href: '/docs/guides/writing' },
+
       {
-        title: 'Transactions',
-        href: '/docs/guides/transactions',
+        type: 'links',
+        title: 'Advanced',
+        links: [
+          { title: 'Designing schema', href: '/docs/guides/designing-schema' },
+          { title: 'Type safety', href: '/docs/guides/type-safety' },
+          {
+            title: 'Transactions',
+            href: '/docs/guides/transactions',
+          },
+          { title: 'Batch writes', href: '/docs/guides/batch' },
+        ],
       },
-      { title: 'Batch writes', href: '/docs/guides/batch' },
     ],
   },
 
   {
     type: 'groups',
     title: 'API reference',
+    links: [{ title: 'API index', href: '/docs/api' }],
     groups: [
       {
         type: 'links',
@@ -76,7 +90,7 @@ const navigation = [
 
       {
         type: 'links',
-        title: 'Advanced',
+        title: 'Extensions',
         links: [
           { title: 'transaction', href: '/docs/api/transaction' },
           { title: 'batch', href: '/docs/api/batch' },
@@ -88,9 +102,20 @@ const navigation = [
         type: 'links',
         title: 'Classes',
         links: [
-          { title: 'Collection', href: '/docs/api/collection' },
-          { title: 'Ref', href: '/docs/api/ref' },
-          { title: 'Doc', href: '/docs/api/doc' },
+          { title: 'Collection', href: '/docs/api/class/collection' },
+          { title: 'Ref', href: '/docs/api/class/ref' },
+          { title: 'Doc', href: '/docs/api/class/doc' },
+        ],
+      },
+
+      {
+        type: 'links',
+        title: 'Types',
+        links: [
+          { title: 'Id', href: '/docs/api/type/id' },
+          { title: 'Ref', href: '/docs/api/type/ref' },
+          { title: 'Doc', href: '/docs/api/type/doc' },
+          { title: 'Schema', href: '/docs/api/type/schema' },
         ],
       },
     ],

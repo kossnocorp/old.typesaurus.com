@@ -21,6 +21,10 @@ The package is heavily optimized and adds just 4 Kb to the build size.
 
 ## Type-safety
 
+### Typed ids
+
+Typesaurus makes all document ids typed, not only preventing bugs but also enabling self-documentation of static and shared ids. [Learn more about typed ids](/docs/guides/type-safety#typed-ids).
+
 ## Developer experience
 
 ### Centralized schema

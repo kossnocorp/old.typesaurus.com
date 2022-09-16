@@ -31,6 +31,8 @@ function GroupsSection({ section }) {
         {section.title}
       </h2>
 
+      {section.links && <Links links={section.links} />}
+
       <ul role="list" className="mt-4 space-y-4">
         {section.groups.map((section, index) => (
           <li key={section.title}>
