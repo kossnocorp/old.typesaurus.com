@@ -137,7 +137,15 @@ function createReduceLinks(parentIndex) {
         )
 
       case 'groups':
-        return section.groups.reduce(createReduceLinks(index), acc)
+        return section.groups.reduce(
+          createReduceLinks(index),
+          acc.concat(
+            section.links?.map((link) => ({
+              link,
+              sectionIndex: parentIndex ?? index,
+            })) || []
+          )
+        )
     }
   }
 }
